@@ -52,7 +52,7 @@ export default function Home() {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className={` ${activeTab === 'website' ? 'scale-110' : ''}`}
+        className=""
       >
         <circle cx="12" cy="12" r="10" />
         <line x1="2" y1="12" x2="22" y2="12" />
@@ -70,7 +70,7 @@ export default function Home() {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className={` ${activeTab === 'wifi' ? 'scale-110' : ''}`}
+        className=""
       >
         <path d="M5 12.55a11 11 0 0 1 14.08 0" />
         <path d="M1.42 9a16 16 0 0 1 21.16 0" />
@@ -89,7 +89,7 @@ export default function Home() {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className={` ${activeTab === 'contact' ? 'scale-110' : ''}`}
+        className=""
       >
         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
         <circle cx="12" cy="7" r="4" />
@@ -324,19 +324,19 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-white flex justify-center items-center">
-      <div className="flex w-full" style={{ maxWidth: '1200px' }}>
+    <main className="min-h-screen bg-white flex justify-center items-center px-4 py-8 md:px-0 md:py-0">
+      <div className="flex flex-col md:flex-row w-full max-w-[1200px]">
       {/* Left Section */}
-      <div className="flex flex-col justify-between p-12 transition-all duration-300 ease-in-out" style={{ marginTop: '-40px' }}>
+      <div className="flex flex-col justify-between p-6 md:p-12 transition-all duration-300 ease-in-out md:-mt-10">
         <div className="transition-all duration-300 ease-in-out">
           {/* Title */}
           <h1 
-            className="mb-8"
+            className="mb-6 md:mb-8"
             style={{
               color: '#1E1E1F',
               textAlign: 'center',
               fontFamily: 'var(--font-instrument-serif), "Instrument Serif", serif',
-              fontSize: '60px',
+              fontSize: 'clamp(32px, 8vw, 60px)',
               fontStyle: 'normal',
               fontWeight: 400,
               lineHeight: 'normal',
@@ -347,9 +347,9 @@ export default function Home() {
           </h1>
 
           {/* Segmented Control */}
-          <div className="flex justify-center mb-8">
+          <div className="flex justify-center mb-6 md:mb-8">
             <div 
-              className="self-stretch"
+              className="self-stretch w-full md:w-auto"
               style={{
                 display: 'flex',
                 height: '56px',
@@ -363,12 +363,14 @@ export default function Home() {
             >
             <button
               onClick={() => setActiveTab('website')}
-              className="flex cursor-pointer items-center gap-2 px-6 py-3 font-medium  text-gray-900"
+              className="flex cursor-pointer items-center justify-center gap-2 px-6 py-3 font-medium  text-gray-900"
               style={{
+                flex: '1 0 0',
                 borderRadius: activeTab === 'website' ? '8px' : '8px',
-                border: activeTab === 'website' ? '1px solid #DCE2E5' : 'none',
+                border: activeTab === 'website' ? '1px solid #DCE2E5' : '1px solid rgba(220, 226, 229, 0)',
                 background: activeTab === 'website' ? '#FFF' : 'transparent',
                 color: activeTab === 'website' ? '#111827' : '#4B5563',
+                transition: 'all 0.15s ease-in-out',
               }}
             >
               {tabIcons.website}
@@ -376,12 +378,14 @@ export default function Home() {
             </button>
             <button
               onClick={() => setActiveTab('wifi')}
-              className="flex cursor-pointer items-center gap-2 px-6 py-3 font-medium  text-gray-900"
+              className="flex cursor-pointer items-center justify-center gap-2 px-6 py-3 font-medium  text-gray-900"
               style={{
+                flex: '1 0 0',
                 borderRadius: activeTab === 'wifi' ? '8px' : '8px',
-                border: activeTab === 'wifi' ? '1px solid #DCE2E5' : 'none',
+                border: activeTab === 'wifi' ? '1px solid #DCE2E5' : '1px solid rgba(220, 226, 229, 0)',
                 background: activeTab === 'wifi' ? '#FFF' : 'transparent',
                 color: activeTab === 'wifi' ? '#111827' : '#4B5563',
+                transition: 'all 0.15s ease-in-out',
               }}
             >
               {tabIcons.wifi}
@@ -389,12 +393,14 @@ export default function Home() {
             </button>
             <button
               onClick={() => setActiveTab('contact')}
-              className="flex cursor-pointer items-center gap-2 px-6 py-3 font-medium  text-gray-900"
+              className="flex cursor-pointer items-center justify-center gap-2 px-6 py-3 font-medium  text-gray-900"
               style={{
+                flex: '1 0 0',
                 borderRadius: activeTab === 'contact' ? '8px' : '8px',
-                border: activeTab === 'contact' ? '1px solid #DCE2E5' : 'none',
+                border: activeTab === 'contact' ? '1px solid #DCE2E5' : '1px solid rgba(220, 226, 229, 0)',
                 background: activeTab === 'contact' ? '#FFF' : 'transparent',
                 color: activeTab === 'contact' ? '#111827' : '#4B5563',
+                transition: 'all 0.15s ease-in-out',
               }}
             >
               {tabIcons.contact}
@@ -405,7 +411,7 @@ export default function Home() {
 
           {/* Input Fields */}
           <div 
-            className="relative mb-8 overflow-hidden transition-all duration-300 ease-in-out"
+            className="relative mb-6 md:mb-8 overflow-hidden transition-all duration-300 ease-in-out"
             style={{ height: formHeight ? `${formHeight}px` : 'auto' }}
           >
               <div
@@ -548,8 +554,8 @@ export default function Home() {
                 gap: '2px',
                 flex: '1 0 0',
                 borderRadius: '8px',
-                border: copySuccess ? '1px solid #10b981' : '1px solid #E2E6E7',
-                background: copySuccess ? '#10b981' : '#FFF',
+                border: copySuccess ? '1px solid #1E1E1F' : '1px solid #E2E6E7',
+                background: copySuccess ? '#1E1E1F' : '#FFF',
                 color: copySuccess ? '#FFF' : '#111827',
               }}
             >
@@ -559,7 +565,7 @@ export default function Home() {
         </div>
 
         {/* Footer */}
-        <div className="mt-12 flex flex-col items-center">
+        <div className="mt-8 md:mt-12 flex flex-col items-center">
           <p className="text-sm text-gray-600 mb-2">
             *Beep* thank you for using this little machine!
           </p>
@@ -572,14 +578,14 @@ export default function Home() {
       </div>
 
       {/* Right Section */}
-      <div className="flex-1 relative overflow-hidden bg-white flex items-center justify-center">
+      <div className="flex-1 relative overflow-hidden bg-white flex items-center justify-center mt-8 md:mt-0">
 
         {/* QR Code Card */}
-        <div className="relative z-10 bg-white rounded-xl shadow-xl p-8">
+        <div className="relative z-10 bg-white rounded-xl shadow-xl p-4 md:p-8 w-full max-w-sm mx-auto">
           {/* WiFi Message */}
           {activeTab === 'wifi' && wifiData.message && qrCodeDataUrl && (
-            <div className="mb-4 text-center w-80 mx-auto">
-              <p className="text-lg font-medium text-gray-800 break-words whitespace-normal">
+            <div className="mb-4 text-center w-full max-w-xs mx-auto">
+              <p className="text-base md:text-lg font-medium text-gray-800 break-words whitespace-normal">
                 {wifiData.message}
               </p>
             </div>
@@ -589,11 +595,11 @@ export default function Home() {
             <img
               src={qrCodeDataUrl}
               alt="QR Code"
-              className="w-80 h-80 "
+              className="w-full max-w-xs md:w-80 md:h-80 mx-auto aspect-square"
             />
           ) : (
-            <div className="w-80 h-80 flex items-center justify-center text-gray-400">
-              <p className="text-center">Enter data to generate QR code</p>
+            <div className="w-full max-w-xs md:w-80 md:h-80 aspect-square flex items-center justify-center text-gray-400 mx-auto">
+              <p className="text-center text-sm md:text-base">Enter data to generate QR code</p>
             </div>
           )}
         </div>

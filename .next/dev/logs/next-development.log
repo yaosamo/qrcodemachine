@@ -6342,3 +6342,67 @@ Import traces:
 [02:59:25.406] Server  LOG     ✓ Compiled in 8ms
 [02:59:35.588] Server  LOG     ✓ Compiled in 8ms
 [02:59:39.446] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[03:03:06.835] Server  LOG     ✓ Compiled in 5ms
+[03:03:32.180] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[03:04:23.993] Server  LOG     ✓ Compiled in 5ms
+[03:04:24.500] Server  LOG     ✓ Compiled in 5ms
+[03:04:24.969] Server  LOG     ✓ Compiled in 5ms
+[03:06:41.620] Server  LOG     ✓ Compiled in 14ms
+[03:06:44.245] Server  LOG     ✓ Compiled in 10ms
+[03:07:02.585] Server  LOG     ✓ Compiled in 14ms
+[03:07:09.356] Server  LOG     ✓ Compiled in 6ms
+[03:07:12.486] Server  LOG     ✓ Compiled in 6ms
+[03:07:27.492] Server  LOG     ✓ Compiled in 7ms
+[03:07:59.274] Server  LOG     ✓ Compiled in 8ms
+[03:08:04.465] Server  LOG     ✓ Compiled in 6ms
+[03:08:12.815] Server  LOG     ✓ Compiled in 9ms
+[03:08:26.180] Server  LOG     ✓ Compiled in 7ms
+[03:08:39.142] Server  LOG     ✓ Compiled in 9ms
+[03:08:39.378] Browser ERROR   ./app/page.tsx:596:1
+Parsing ecmascript source code failed
+  594 |     </main>
+  595 |   );
+> 596 | }
+      | ^
+  597 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[03:09:26.728] Server  LOG     ✓ Compiled in 9ms
+[03:09:31.036] Server  LOG     ✓ Compiled in 23ms
+[03:09:58.306] Server  LOG     ✓ Compiled in 9ms
+[03:09:59.633] Server  LOG     ✓ Compiled in 6ms
+[03:10:03.501] Server  LOG     ✓ Compiled in 6ms
+[03:10:15.492] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[03:10:45.244] Server  LOG     ✓ Compiled in 9ms
+[03:10:50.131] Server  LOG     ✓ Compiled in 37ms
+[03:10:52.074] Server  LOG     ✓ Compiled in 11ms
+[03:10:53.953] Server  LOG     ✓ Compiled in 9ms
+[03:10:55.511] Server  LOG     ✓ Compiled in 8ms
+[03:10:56.260] Server  LOG     ✓ Compiled in 8ms
+[03:12:52.388] Server  LOG     ✓ Compiled in 10ms
+[03:13:29.240] Server  LOG     ✓ Compiled in 10ms
+[03:13:41.307] Server  LOG     ✓ Compiled in 6ms
+[03:13:47.976] Server  LOG     ✓ Compiled in 7ms
+[03:13:52.750] Server  LOG     ✓ Compiled in 6ms
+[03:14:00.680] Server  LOG     ✓ Compiled in 6ms
+[03:15:09.295] Server  LOG     ✓ Compiled in 9ms
+[03:15:10.349] Server  LOG     ✓ Compiled in 11ms
+[03:15:12.230] Server  LOG     ✓ Compiled in 6ms
+[03:15:13.160] Server  LOG     ✓ Compiled in 9ms
+[03:15:16.642] Server  LOG     ✓ Compiled in 10ms
+[03:15:25.339] Server  LOG     ✓ Compiled in 9ms
+[03:15:25.966] Server  LOG     ✓ Compiled in 9ms
+[03:15:26.591] Server  LOG     ✓ Compiled in 9ms
+[03:15:27.235] Server  LOG     ✓ Compiled in 9ms
+[03:16:49.337] Server  LOG     ✓ Compiled in 6ms
+[03:16:50.816] Server  LOG     ✓ Compiled in 24ms
+[03:16:52.269] Server  LOG     ✓ Compiled in 6ms
