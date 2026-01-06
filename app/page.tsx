@@ -9,6 +9,7 @@ interface WiFiData {
   ssid: string;
   password: string;
   security: 'WPA' | 'WEP' | 'nopass';
+  message: string;
 }
 
 interface ContactData {
@@ -25,6 +26,7 @@ export default function Home() {
     ssid: 'MyWiFiNetwork',
     password: 'password123',
     security: 'WPA',
+    message: 'Scan to connect to Wi-Fi',
   });
   const [contactData, setContactData] = useState<ContactData>({
     name: 'John Doe',
@@ -34,7 +36,9 @@ export default function Home() {
   const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string>('');
   const [svgData, setSvgData] = useState<string>('');
   const [copySuccess, setCopySuccess] = useState(false);
+  const [formHeight, setFormHeight] = useState<number | undefined>(undefined);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const formContentRef = useRef<HTMLDivElement>(null);
 
   const tabIcons = {
     website: (
@@ -48,7 +52,7 @@ export default function Home() {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className={`transition-all duration-300 ${activeTab === 'website' ? 'scale-110' : ''}`}
+        className={` ${activeTab === 'website' ? 'scale-110' : ''}`}
       >
         <circle cx="12" cy="12" r="10" />
         <line x1="2" y1="12" x2="22" y2="12" />
@@ -66,7 +70,7 @@ export default function Home() {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className={`transition-all duration-300 ${activeTab === 'wifi' ? 'scale-110' : ''}`}
+        className={` ${activeTab === 'wifi' ? 'scale-110' : ''}`}
       >
         <path d="M5 12.55a11 11 0 0 1 14.08 0" />
         <path d="M1.42 9a16 16 0 0 1 21.16 0" />
@@ -85,7 +89,7 @@ export default function Home() {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className={`transition-all duration-300 ${activeTab === 'contact' ? 'scale-110' : ''}`}
+        className={` ${activeTab === 'contact' ? 'scale-110' : ''}`}
       >
         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
         <circle cx="12" cy="7" r="4" />
@@ -132,9 +136,9 @@ export default function Home() {
       }
 
       try {
-        // Generate PNG data URL
+        // Generate PNG data URL at 2K resolution
         const dataUrl = await QRCode.toDataURL(data, {
-          width: 400,
+          width: 2000,
           margin: 2,
           color: {
             dark: '#000000',
@@ -162,13 +166,101 @@ export default function Home() {
     generateQRCode();
   }, [activeTab, websiteUrl, wifiData, contactData]);
 
-  const handleDownload = () => {
+  // Measure and update form height for smooth transitions
+  useEffect(() => {
+    if (formContentRef.current) {
+      const height = formContentRef.current.scrollHeight;
+      setFormHeight(height);
+    }
+  }, [activeTab]);
+
+  const handleDownload = async () => {
     if (!qrCodeDataUrl) return;
 
-    const link = document.createElement('a');
-    link.download = `qrcode-${activeTab}-${Date.now()}.png`;
-    link.href = qrCodeDataUrl;
-    link.click();
+    // For WiFi, create a canvas with message and QR code
+    if (activeTab === 'wifi' && wifiData.message) {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const padding = 256; // Padding around the entire card (2K resolution)
+      const qrSize = 2000; // QR code size (2K resolution)
+      const messagePadding = 128; // Space between message and QR code
+      
+      // Load the QR code image
+      const qrImage = new Image();
+      qrImage.src = qrCodeDataUrl;
+      
+      await new Promise((resolve) => {
+        qrImage.onload = resolve;
+      });
+
+      // Calculate dimensions
+      const messageHeight = 160; // Approximate height for message text
+      const totalHeight = padding * 2 + messageHeight + messagePadding + qrSize;
+      const totalWidth = padding * 2 + qrSize;
+      
+      canvas.width = totalWidth;
+      canvas.height = totalHeight;
+
+      // Draw white background
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, totalWidth, totalHeight);
+
+      // Draw message text
+      ctx.fillStyle = '#1f2937'; // text-gray-800
+      ctx.font = '96px Inter, sans-serif'; // text-lg font-medium (scaled for 2K)
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      
+      // Word wrap the message
+      const maxWidth = qrSize;
+      const words = wifiData.message.split(' ');
+      const lines: string[] = [];
+      let currentLine = '';
+      
+      words.forEach((word) => {
+        const testLine = currentLine + (currentLine ? ' ' : '') + word;
+        const metrics = ctx.measureText(testLine);
+        if (metrics.width > maxWidth && currentLine) {
+          lines.push(currentLine);
+          currentLine = word;
+        } else {
+          currentLine = testLine;
+        }
+      });
+      if (currentLine) {
+        lines.push(currentLine);
+      }
+
+      // Draw each line of the message
+      const lineHeight = 128; // Scaled for 2K resolution
+      const messageY = padding;
+      lines.forEach((line, index) => {
+        ctx.fillText(line, totalWidth / 2, messageY + index * lineHeight);
+      });
+
+      // Draw QR code
+      const qrY = padding + (lines.length * lineHeight) + messagePadding;
+      ctx.drawImage(qrImage, padding, qrY, qrSize, qrSize);
+
+      // Download the canvas
+      canvas.toBlob((blob) => {
+        if (!blob) return;
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.download = `qrcode-${activeTab}-${Date.now()}.png`;
+        link.href = url;
+        link.click();
+        URL.revokeObjectURL(url);
+      });
+    } else {
+      // For other tabs, download QR code directly
+      const link = document.createElement('a');
+      link.download = `qrcode-${activeTab}-${Date.now()}.png`;
+      link.href = qrCodeDataUrl;
+      link.click();
+    }
   };
 
   const handleCopySVG = async () => {
@@ -232,56 +324,94 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-white flex">
+    <main className="min-h-screen bg-white flex justify-center items-center">
+      <div className="flex w-full" style={{ maxWidth: '1200px' }}>
       {/* Left Section */}
-      <div className="flex-1 flex flex-col justify-between p-12 max-w-2xl">
-        <div>
+      <div className="flex flex-col justify-between p-12 transition-all duration-300 ease-in-out" style={{ marginTop: '-40px' }}>
+        <div className="transition-all duration-300 ease-in-out">
           {/* Title */}
-          <h1 className="text-5xl font-serif mb-8 text-gray-900" style={{ fontFamily: 'var(--font-serif)' }}>QR Code Machine</h1>
+          <h1 
+            className="mb-8"
+            style={{
+              color: '#1E1E1F',
+              textAlign: 'center',
+              fontFamily: 'var(--font-instrument-serif), "Instrument Serif", serif',
+              fontSize: '60px',
+              fontStyle: 'normal',
+              fontWeight: 400,
+              lineHeight: 'normal',
+              letterSpacing: '-1.897px',
+            }}
+          >
+            QR Code Machine
+          </h1>
 
-          {/* Tabs */}
-          <div className="flex gap-2 mb-8">
+          {/* Segmented Control */}
+          <div className="flex justify-center mb-8">
+            <div 
+              className="self-stretch"
+              style={{
+                display: 'flex',
+                height: '56px',
+                padding: '4px',
+                gap: '8px',
+                alignSelf: 'stretch',
+                borderRadius: '12px',
+                border: '1px solid #E2E6E8',
+                background: '#ECEEEF',
+              }}
+            >
             <button
               onClick={() => setActiveTab('website')}
-              className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
-                activeTab === 'website'
-                  ? 'bg-white border-2 border-gray-200 shadow-sm text-gray-900'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
+              className="flex cursor-pointer items-center gap-2 px-6 py-3 font-medium  text-gray-900"
+              style={{
+                borderRadius: activeTab === 'website' ? '8px' : '8px',
+                border: activeTab === 'website' ? '1px solid #DCE2E5' : 'none',
+                background: activeTab === 'website' ? '#FFF' : 'transparent',
+                color: activeTab === 'website' ? '#111827' : '#4B5563',
+              }}
             >
               {tabIcons.website}
               <span>Website</span>
             </button>
             <button
               onClick={() => setActiveTab('wifi')}
-              className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
-                activeTab === 'wifi'
-                  ? 'bg-white border-2 border-gray-200 shadow-sm text-gray-900'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
+              className="flex cursor-pointer items-center gap-2 px-6 py-3 font-medium  text-gray-900"
+              style={{
+                borderRadius: activeTab === 'wifi' ? '8px' : '8px',
+                border: activeTab === 'wifi' ? '1px solid #DCE2E5' : 'none',
+                background: activeTab === 'wifi' ? '#FFF' : 'transparent',
+                color: activeTab === 'wifi' ? '#111827' : '#4B5563',
+              }}
             >
               {tabIcons.wifi}
               <span>Wi-Fi</span>
             </button>
             <button
               onClick={() => setActiveTab('contact')}
-              className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
-                activeTab === 'contact'
-                  ? 'bg-white border-2 border-gray-200 shadow-sm text-gray-900'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
+              className="flex cursor-pointer items-center gap-2 px-6 py-3 font-medium  text-gray-900"
+              style={{
+                borderRadius: activeTab === 'contact' ? '8px' : '8px',
+                border: activeTab === 'contact' ? '1px solid #DCE2E5' : 'none',
+                background: activeTab === 'contact' ? '#FFF' : 'transparent',
+                color: activeTab === 'contact' ? '#111827' : '#4B5563',
+              }}
             >
               {tabIcons.contact}
               <span>Contact</span>
             </button>
+            </div>
           </div>
 
           {/* Input Fields */}
-          <div className="relative mb-8 min-h-[200px] overflow-hidden">
-            <div
-              key={activeTab}
-              className="tab-content-enter"
-            >
+          <div 
+            className="relative mb-8 overflow-hidden transition-all duration-300 ease-in-out"
+            style={{ height: formHeight ? `${formHeight}px` : 'auto' }}
+          >
+              <div
+                ref={formContentRef}
+                key={activeTab}
+              >
               {activeTab === 'website' && (
                 <div className="space-y-6">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -292,7 +422,7 @@ export default function Home() {
                     value={websiteUrl}
                     onChange={(e) => setWebsiteUrl(e.target.value)}
                     placeholder="creativeclub.dev"
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-gray-400 transition-all duration-300"
+                    className="w-full text-gray-900 px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-gray-400 "
                   />
                 </div>
               )}
@@ -308,7 +438,7 @@ export default function Home() {
                       value={wifiData.ssid}
                       onChange={(e) => setWifiData({ ...wifiData, ssid: e.target.value })}
                       placeholder="Enter your WiFi network name"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-gray-400 transition-all duration-300"
+                      className="w-full text-gray-900 px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-gray-400 "
                     />
                   </div>
                   <div>
@@ -320,7 +450,19 @@ export default function Home() {
                       value={wifiData.password}
                       onChange={(e) => setWifiData({ ...wifiData, password: e.target.value })}
                       placeholder="Enter your WiFi password"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-gray-400 transition-all duration-300"
+                      className="w-full text-gray-900 px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-gray-400 "
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Message
+                    </label>
+                    <input
+                      type="text"
+                      value={wifiData.message}
+                      onChange={(e) => setWifiData({ ...wifiData, message: e.target.value })}
+                      placeholder="Scan to connect to Wi-Fi"
+                      className="w-full text-gray-900 px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-gray-400 "
                     />
                   </div>
                 </div>
@@ -337,7 +479,7 @@ export default function Home() {
                       value={contactData.name}
                       onChange={(e) => setContactData({ ...contactData, name: e.target.value })}
                       placeholder="John Doe"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-gray-400 transition-all duration-300"
+                      className="text-gray-900 w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-gray-400 "
                     />
                   </div>
                   <div>
@@ -349,7 +491,7 @@ export default function Home() {
                       value={contactData.phone}
                       onChange={(e) => setContactData({ ...contactData, phone: e.target.value })}
                       placeholder="+1 234 567 8900"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-gray-400 transition-all duration-300"
+                      className="text-gray-900 w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-gray-400 "
                     />
                   </div>
                   <div>
@@ -361,12 +503,13 @@ export default function Home() {
                       value={contactData.email}
                       onChange={(e) => setContactData({ ...contactData, email: e.target.value })}
                       placeholder="john@example.com"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-gray-400 transition-all duration-300"
+                      className="text-gray-900 w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-gray-400 "
                     />
                   </div>
                 </div>
               )}
-            </div>
+              </div>
+            
           </div>
 
           {/* Action Buttons */}
@@ -374,18 +517,41 @@ export default function Home() {
             <button
               onClick={handleDownload}
               disabled={!qrCodeDataUrl}
-              className="flex-1 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-md hover:shadow-lg"
+              className="text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed "
+              style={{
+                display: 'flex',
+                height: '56px',
+                padding: '24px',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '2px',
+                flex: '1 0 0',
+                borderRadius: '8px',
+                background: 'linear-gradient(180deg, #3889F9 0%, #3D52EA 100%)',
+                boxShadow: '0 0 6px 3px rgba(255, 255, 255, 0.25) inset, 0 6px 20px 0 rgba(59, 119, 244, 0.42)',
+              }}
             >
               Download QR Code
             </button>
             <button
               onClick={handleCopySVG}
               disabled={!svgData}
-              className={`flex-1 px-6 py-3 rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 ${
-                copySuccess
-                  ? 'bg-green-500 border-2 border-green-500 text-white'
-                  : 'bg-white border-2 border-gray-300 text-gray-900 hover:bg-gray-50'
-              }`}
+              className="font-medium disabled:opacity-50 disabled:cursor-not-allowed  text-gray-900"
+              style={{
+                display: 'flex',
+                height: '56px',
+                padding: '24px',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '2px',
+                flex: '1 0 0',
+                borderRadius: '8px',
+                border: copySuccess ? '1px solid #10b981' : '1px solid #E2E6E7',
+                background: copySuccess ? '#10b981' : '#FFF',
+                color: copySuccess ? '#FFF' : '#111827',
+              }}
             >
               {copySuccess ? 'Copied!' : 'Copy as SVG'}
             </button>
@@ -393,47 +559,37 @@ export default function Home() {
         </div>
 
         {/* Footer */}
-        <div className="mt-12">
+        <div className="mt-12 flex flex-col items-center">
           <p className="text-sm text-gray-600 mb-2">
             *Beep* thank you for using this little machine!
           </p>
-          <p className="text-2xl text-gray-800" style={{ fontFamily: 'var(--font-script)' }}>Creative Club</p>
+          <img 
+            src="/creativeclub.svg" 
+            alt="Creative Club" 
+            className="h-5"
+          />
         </div>
       </div>
 
       {/* Right Section */}
-      <div className="flex-1 relative overflow-hidden bg-gray-50 flex items-center justify-center">
-        {/* Decorative Background Pattern */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="grid grid-cols-20 gap-1 h-full w-full p-8">
-            {Array.from({ length: 400 }).map((_, i) => {
-              // Create a more controlled pattern with blue squares
-              const row = Math.floor(i / 20);
-              const col = i % 20;
-              const seed = (row * 20 + col) % 37;
-              const shouldColor = seed % 7 === 0 || seed % 11 === 0;
-              const colorClass = shouldColor
-                ? seed % 3 === 0
-                  ? 'bg-blue-400'
-                  : 'bg-blue-500'
-                : 'bg-transparent';
-              return (
-                <div
-                  key={i}
-                  className={`${colorClass} rounded transition-all duration-700`}
-                />
-              );
-            })}
-          </div>
-        </div>
+      <div className="flex-1 relative overflow-hidden bg-white flex items-center justify-center">
 
         {/* QR Code Card */}
-        <div className="relative z-10 bg-white rounded-xl shadow-xl p-8 transition-all duration-300 hover:shadow-2xl">
+        <div className="relative z-10 bg-white rounded-xl shadow-xl p-8">
+          {/* WiFi Message */}
+          {activeTab === 'wifi' && wifiData.message && qrCodeDataUrl && (
+            <div className="mb-4 text-center w-80 mx-auto">
+              <p className="text-lg font-medium text-gray-800 break-words whitespace-normal">
+                {wifiData.message}
+              </p>
+            </div>
+          )}
+          
           {qrCodeDataUrl ? (
             <img
               src={qrCodeDataUrl}
               alt="QR Code"
-              className="w-80 h-80 transition-opacity duration-300"
+              className="w-80 h-80 "
             />
           ) : (
             <div className="w-80 h-80 flex items-center justify-center text-gray-400">
@@ -441,6 +597,7 @@ export default function Home() {
             </div>
           )}
         </div>
+      </div>
       </div>
 
       <canvas ref={canvasRef} className="hidden" />
