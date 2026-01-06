@@ -43,3 +43,33 @@ body {
 .hover-bounce:hover {
   animation: bounce-scale 0.4s ease-in-out;
 }
+
+.qr-card-3d {
+  transform-style: preserve-3d;
+}
+
+button.button-hover:not(:disabled):hover {
+  transform: scale(1.05) translateY(-2px) !important;
+}
+
+.segmented-tab:hover {
+  background: #F6F8F9 !important;
+}
+
+.segmented-tab[style*="background: #FFF"]:hover {
+  background: #FFF !important;
+}
+
+.input-field:hover {
+  border-color: #C9D0D2 !important;
+}
+
+.title-responsive {
+  font-size: 56px;
+}
+
+@media (min-width: 640px) {
+  .title-responsive {
+    font-size: clamp(56px, 7vw, 60px);
+  }
+}
