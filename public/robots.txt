@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://qrcodemachine.com/sitemap.xml
+Sitemap: https://qrcode-machine.com/sitemap.xml
 

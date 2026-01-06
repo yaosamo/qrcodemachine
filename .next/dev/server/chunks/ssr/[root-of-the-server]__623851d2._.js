@@ -104,20 +104,20 @@ const metadata = {
     ],
     creator: "Creative Club",
     publisher: "Creative Club",
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://qrcodemachine.com"),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://qrcode-machine.com"),
     alternates: {
         canonical: "/"
     },
     openGraph: {
         type: "website",
         locale: "en_US",
-        url: "https://qrcodemachine.com",
+        url: "https://qrcode-machine.com",
         siteName: "QR Code Machine",
         title: "QR Code Machine - Free QR Code Generator",
         description: "Free QR code generator. Create QR codes for websites, WiFi networks, and contact cards instantly. Download high-resolution QR codes.",
         images: [
             {
-                url: "/og-image.png",
+                url: "/og.png",
                 width: 1200,
                 height: 630,
                 alt: "QR Code Machine - Free QR Code Generator"
@@ -129,7 +129,7 @@ const metadata = {
         title: "QR Code Machine - Free QR Code Generator",
         description: "Free QR code generator. Create QR codes for websites, WiFi networks, and contact cards instantly.",
         images: [
-            "/og-image.png"
+            "/og.png"
         ],
         creator: "@creativeclub"
     },
@@ -147,7 +147,34 @@ const metadata = {
     verification: {
         google: "your-google-verification-code"
     },
-    category: "tools"
+    category: "tools",
+    icons: {
+        icon: [
+            {
+                url: "/favicon.png",
+                sizes: "512x512",
+                type: "image/png"
+            },
+            {
+                url: "/favicon.png",
+                sizes: "32x32",
+                type: "image/png"
+            },
+            {
+                url: "/favicon.png",
+                sizes: "16x16",
+                type: "image/png"
+            }
+        ],
+        apple: [
+            {
+                url: "/favicon.png",
+                sizes: "180x180",
+                type: "image/png"
+            }
+        ],
+        shortcut: "/favicon.png"
+    }
 };
 function RootLayout({ children }) {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("html", {
@@ -162,7 +189,7 @@ function RootLayout({ children }) {
                             "@type": "WebApplication",
                             "name": "QR Code Machine",
                             "description": "Free QR code generator. Create QR codes for websites, WiFi networks, and contact cards instantly.",
-                            "url": "https://qrcodemachine.com",
+                            "url": "https://qrcode-machine.com",
                             "applicationCategory": "UtilityApplication",
                             "operatingSystem": "Any",
                             "offers": {
@@ -187,12 +214,12 @@ function RootLayout({ children }) {
                     }
                 }, void 0, false, {
                     fileName: "[project]/app/layout.tsx",
-                    lineNumber: 95,
+                    lineNumber: 106,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/layout.tsx",
-                lineNumber: 94,
+                lineNumber: 105,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("body", {
@@ -201,19 +228,19 @@ function RootLayout({ children }) {
                     children,
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$vercel$2f$analytics$2f$dist$2f$next$2f$index$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Analytics"], {}, void 0, false, {
                         fileName: "[project]/app/layout.tsx",
-                        lineNumber: 132,
+                        lineNumber: 143,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/layout.tsx",
-                lineNumber: 128,
+                lineNumber: 139,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/layout.tsx",
-        lineNumber: 93,
+        lineNumber: 104,
         columnNumber: 5
     }, this);
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Instrument_Serif } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const inter = Inter({
@@ -40,20 +40,20 @@ export const metadata: Metadata = {
   authors: [{ name: "Creative Club" }],
   creator: "Creative Club",
   publisher: "Creative Club",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://qrcodemachine.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://qrcode-machine.com"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://qrcodemachine.com",
+    url: "https://qrcode-machine.com",
     siteName: "QR Code Machine",
     title: "QR Code Machine - Free QR Code Generator",
     description: "Free QR code generator. Create QR codes for websites, WiFi networks, and contact cards instantly. Download high-resolution QR codes.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og.png",
         width: 1200,
         height: 630,
         alt: "QR Code Machine - Free QR Code Generator",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "QR Code Machine - Free QR Code Generator",
     description: "Free QR code generator. Create QR codes for websites, WiFi networks, and contact cards instantly.",
-    images: ["/og-image.png"],
+    images: ["/og.png"],
     creator: "@creativeclub",
   },
   robots: {
@@ -82,6 +82,17 @@ export const metadata: Metadata = {
     google: "your-google-verification-code",
   },
   category: "tools",
+  icons: {
+    icon: [
+      { url: "/favicon.png", sizes: "512x512", type: "image/png" },
+      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [
+      { url: "/favicon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
@@ -100,7 +111,7 @@ export default function RootLayout({
               "@type": "WebApplication",
               "name": "QR Code Machine",
               "description": "Free QR code generator. Create QR codes for websites, WiFi networks, and contact cards instantly.",
-              "url": "https://qrcodemachine.com",
+              "url": "https://qrcode-machine.com",
               "applicationCategory": "UtilityApplication",
               "operatingSystem": "Any",
               "offers": {

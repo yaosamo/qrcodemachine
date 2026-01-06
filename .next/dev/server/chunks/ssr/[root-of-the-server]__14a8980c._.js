@@ -104,20 +104,20 @@ const metadata = {
     ],
     creator: "Creative Club",
     publisher: "Creative Club",
-    metadataBase: new URL("https://qrcodemachine.com"),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://qrcode-machine.com"),
     alternates: {
         canonical: "/"
     },
     openGraph: {
         type: "website",
         locale: "en_US",
-        url: "https://qrcodemachine.com",
+        url: "https://qrcode-machine.com",
         siteName: "QR Code Machine",
         title: "QR Code Machine - Free QR Code Generator",
         description: "Free QR code generator. Create QR codes for websites, WiFi networks, and contact cards instantly. Download high-resolution QR codes.",
         images: [
             {
-                url: "/og-image.png",
+                url: "/og.png",
                 width: 1200,
                 height: 630,
                 alt: "QR Code Machine - Free QR Code Generator"
@@ -129,7 +129,7 @@ const metadata = {
         title: "QR Code Machine - Free QR Code Generator",
         description: "Free QR code generator. Create QR codes for websites, WiFi networks, and contact cards instantly.",
         images: [
-            "/og-image.png"
+            "/og.png"
         ],
         creator: "@creativeclub"
     },
@@ -162,7 +162,7 @@ function RootLayout({ children }) {
                             "@type": "WebApplication",
                             "name": "QR Code Machine",
                             "description": "Free QR code generator. Create QR codes for websites, WiFi networks, and contact cards instantly.",
-                            "url": "https://qrcodemachine.com",
+                            "url": "https://qrcode-machine.com",
                             "applicationCategory": "UtilityApplication",
                             "operatingSystem": "Any",
                             "offers": {
