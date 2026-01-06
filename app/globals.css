@@ -30,3 +30,16 @@ body {
 .font-instrument-serif {
   font-family: var(--font-instrument-serif), "Instrument Serif", serif;
 }
+
+@keyframes bounce-scale {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+.hover-bounce:hover {
+  animation: bounce-scale 0.4s ease-in-out;
+}

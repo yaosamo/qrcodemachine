@@ -765,7 +765,7 @@ function Home() {
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 onClick: handleDownload,
                                                 disabled: !qrCodeDataUrl,
-                                                className: "text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed ",
+                                                className: "text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer",
                                                 style: {
                                                     display: 'flex',
                                                     height: '56px',
@@ -788,7 +788,7 @@ function Home() {
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 onClick: handleCopySVG,
                                                 disabled: !svgData,
-                                                className: "font-medium disabled:opacity-50 disabled:cursor-not-allowed  text-gray-900",
+                                                className: "font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer text-gray-900",
                                                 style: {
                                                     display: 'flex',
                                                     height: '56px',
@@ -832,10 +832,20 @@ function Home() {
                                         lineNumber: 569,
                                         columnNumber: 11
                                     }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                        src: "/creativeclub.svg",
-                                        alt: "Creative Club",
-                                        className: "h-5"
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                                        href: "http://creativeclub.dev",
+                                        target: "_blank",
+                                        rel: "noopener noreferrer",
+                                        className: "inline-block hover-bounce cursor-pointer",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                            src: "/creativeclub.svg",
+                                            alt: "Creative Club",
+                                            className: "h-5"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/page.tsx",
+                                            lineNumber: 578,
+                                            columnNumber: 13
+                                        }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
                                         lineNumber: 572,
@@ -865,12 +875,12 @@ function Home() {
                                         children: wifiData.message
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 588,
+                                        lineNumber: 595,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 587,
+                                    lineNumber: 594,
                                     columnNumber: 13
                                 }, this),
                                 qrCodeDataUrl ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
@@ -879,7 +889,7 @@ function Home() {
                                     className: "w-full max-w-xs md:w-80 md:h-80 mx-auto aspect-square"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 595,
+                                    lineNumber: 602,
                                     columnNumber: 13
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "w-full max-w-xs md:w-80 md:h-80 aspect-square flex items-center justify-center text-gray-400 mx-auto",
@@ -888,23 +898,23 @@ function Home() {
                                         children: "Enter data to generate QR code"
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 602,
+                                        lineNumber: 609,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 601,
+                                    lineNumber: 608,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 584,
+                            lineNumber: 591,
                             columnNumber: 9
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 581,
+                        lineNumber: 588,
                         columnNumber: 7
                     }, this)
                 ]
@@ -918,7 +928,7 @@ function Home() {
                 className: "hidden"
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 609,
+                lineNumber: 616,
                 columnNumber: 7
             }, this)
         ]

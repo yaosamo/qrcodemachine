@@ -523,7 +523,7 @@ export default function Home() {
             <button
               onClick={handleDownload}
               disabled={!qrCodeDataUrl}
-              className="text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed "
+              className="text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               style={{
                 display: 'flex',
                 height: '56px',
@@ -543,7 +543,7 @@ export default function Home() {
             <button
               onClick={handleCopySVG}
               disabled={!svgData}
-              className="font-medium disabled:opacity-50 disabled:cursor-not-allowed  text-gray-900"
+              className="font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer text-gray-900"
               style={{
                 display: 'flex',
                 height: '56px',
@@ -569,11 +569,18 @@ export default function Home() {
           <p className="text-sm text-gray-600 mb-2">
             *Beep* thank you for using this little machine!
           </p>
-          <img 
-            src="/creativeclub.svg" 
-            alt="Creative Club" 
-            className="h-5"
-          />
+          <a 
+            href="http://creativeclub.dev" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-block hover-bounce cursor-pointer"
+          >
+            <img 
+              src="/creativeclub.svg" 
+              alt="Creative Club" 
+              className="h-5"
+            />
+          </a>
         </div>
       </div>
 
