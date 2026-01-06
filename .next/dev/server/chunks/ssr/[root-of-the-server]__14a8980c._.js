@@ -75,30 +75,145 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$vercel$2f$
 ;
 ;
 const metadata = {
-    title: "QR Code Machine",
-    description: "Generate QR codes for websites, Wi-Fi, and contacts"
+    title: {
+        default: "QR Code Machine - Free QR Code Generator | Website, WiFi, Contact",
+        template: "%s | QR Code Machine"
+    },
+    description: "Free QR code generator. Create QR codes for websites, WiFi networks, and contact cards instantly. Download high-resolution QR codes. No signup required.",
+    keywords: [
+        "QR code generator",
+        "free QR code",
+        "QR code maker",
+        "QR code creator",
+        "website QR code",
+        "WiFi QR code",
+        "contact QR code",
+        "vCard QR code",
+        "QR code download",
+        "online QR code generator",
+        "QR code tool",
+        "generate QR code",
+        "QR code for website",
+        "QR code for WiFi",
+        "QR code for contact"
+    ],
+    authors: [
+        {
+            name: "Creative Club"
+        }
+    ],
+    creator: "Creative Club",
+    publisher: "Creative Club",
+    metadataBase: new URL("https://qrcodemachine.com"),
+    alternates: {
+        canonical: "/"
+    },
+    openGraph: {
+        type: "website",
+        locale: "en_US",
+        url: "https://qrcodemachine.com",
+        siteName: "QR Code Machine",
+        title: "QR Code Machine - Free QR Code Generator",
+        description: "Free QR code generator. Create QR codes for websites, WiFi networks, and contact cards instantly. Download high-resolution QR codes.",
+        images: [
+            {
+                url: "/og-image.png",
+                width: 1200,
+                height: 630,
+                alt: "QR Code Machine - Free QR Code Generator"
+            }
+        ]
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "QR Code Machine - Free QR Code Generator",
+        description: "Free QR code generator. Create QR codes for websites, WiFi networks, and contact cards instantly.",
+        images: [
+            "/og-image.png"
+        ],
+        creator: "@creativeclub"
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            "max-video-preview": -1,
+            "max-image-preview": "large",
+            "max-snippet": -1
+        }
+    },
+    verification: {
+        google: "your-google-verification-code"
+    },
+    category: "tools"
 };
 function RootLayout({ children }) {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("html", {
         lang: "en",
-        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("body", {
-            className: `${__TURBOPACK__imported__module__$5b$next$5d2f$internal$2f$font$2f$google$2f$inter_fe8b9d92$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].variable} ${__TURBOPACK__imported__module__$5b$next$5d2f$internal$2f$font$2f$google$2f$instrument_serif_223d13e3$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].variable} antialiased`,
-            children: [
-                children,
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$vercel$2f$analytics$2f$dist$2f$react$2f$index$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Analytics"], {}, void 0, false, {
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("head", {
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("script", {
+                    type: "application/ld+json",
+                    dangerouslySetInnerHTML: {
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "WebApplication",
+                            "name": "QR Code Machine",
+                            "description": "Free QR code generator. Create QR codes for websites, WiFi networks, and contact cards instantly.",
+                            "url": "https://qrcodemachine.com",
+                            "applicationCategory": "UtilityApplication",
+                            "operatingSystem": "Any",
+                            "offers": {
+                                "@type": "Offer",
+                                "price": "0",
+                                "priceCurrency": "USD"
+                            },
+                            "aggregateRating": {
+                                "@type": "AggregateRating",
+                                "ratingValue": "5",
+                                "ratingCount": "1"
+                            },
+                            "featureList": [
+                                "Generate QR codes for websites",
+                                "Create WiFi QR codes",
+                                "Generate contact card QR codes",
+                                "Download high-resolution QR codes",
+                                "Free to use",
+                                "No signup required"
+                            ]
+                        })
+                    }
+                }, void 0, false, {
                     fileName: "[project]/app/layout.tsx",
-                    lineNumber: 33,
+                    lineNumber: 95,
                     columnNumber: 9
                 }, this)
-            ]
-        }, void 0, true, {
-            fileName: "[project]/app/layout.tsx",
-            lineNumber: 29,
-            columnNumber: 7
-        }, this)
-    }, void 0, false, {
+            }, void 0, false, {
+                fileName: "[project]/app/layout.tsx",
+                lineNumber: 94,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("body", {
+                className: `${__TURBOPACK__imported__module__$5b$next$5d2f$internal$2f$font$2f$google$2f$inter_fe8b9d92$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].variable} ${__TURBOPACK__imported__module__$5b$next$5d2f$internal$2f$font$2f$google$2f$instrument_serif_223d13e3$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].variable} antialiased`,
+                children: [
+                    children,
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$vercel$2f$analytics$2f$dist$2f$react$2f$index$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Analytics"], {}, void 0, false, {
+                        fileName: "[project]/app/layout.tsx",
+                        lineNumber: 132,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/app/layout.tsx",
+                lineNumber: 128,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
         fileName: "[project]/app/layout.tsx",
-        lineNumber: 28,
+        lineNumber: 93,
         columnNumber: 5
     }, this);
 }
